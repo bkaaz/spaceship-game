@@ -1,4 +1,4 @@
-import { GameObject, Position } from "../types";
+import { GameObject, Position } from "./types";
 
 export class Obstacle implements GameObject {
     constructor(

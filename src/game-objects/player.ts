@@ -1,4 +1,5 @@
-import { GameObject, KeyboardState, Position } from "../types";
+import { KeyboardState } from "../types";
+import { GameObject, Position } from "./types";
 
 export class Player implements GameObject {
     constructor(

@@ -1,5 +1,5 @@
+import { GameObject } from "./game-objects/types";
 import { KeyboardHandler } from "./keyboard-handler";
-import { GameObject } from "./types";
 
 export class Game {
     private gameObjects: GameObject[] = [];
