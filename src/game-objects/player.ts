@@ -15,7 +15,7 @@ export class Player implements GameObject {
     private velocityDecay = 0.05;
     private acceleration = 0.2;
 
-    getPosition(): Position {
+    get position(): Position {
         return { x: this.x - this.image.width / 2, y: this.y - this.image.height / 2, width: this.image.width, height: this.image.height }
     }
 
@@ -58,5 +58,19 @@ export class Player implements GameObject {
         ctx.drawImage(this.image, -this.image.width / 2, -this.image.height / 2);
 
         ctx.restore();
+    }
+
+    isCollidingWith({ x, y, width, height }: Position): boolean {
+        return this.position.x < x + width &&
+            this.position.x + this.position.width > x &&
+            this.position.y < y + height &&
+            this.position.y + this.position.height > y
+    }
+
+    isCollidingWithScreenEdge(screenWidth: number, screenHeight: number): boolean {
+        return this.position.x < 0 ||
+            this.position.x + this.position.width > screenWidth ||
+            this.position.y < 0 ||
+            this.position.y + this.position.height > screenHeight;
     }
 }

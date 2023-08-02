@@ -10,7 +10,7 @@ export class Obstacle implements GameObject {
 
     private color = '#ccc'
 
-    getPosition(): Position {
+    get position(): Position {
         return { x: this.x, y: this.y, width: this.width, height: this.height }
     }
 
@@ -21,5 +21,13 @@ export class Obstacle implements GameObject {
     draw(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+
+    isCollidingWith(): boolean {
+        return false
+    }
+
+    isCollidingWithScreenEdge(): boolean {
+        return false
     }
 }
