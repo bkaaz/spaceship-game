@@ -1,4 +1,6 @@
-export class Player {
+import { GameObject, KeyboardState, Position } from "../types";
+
+export class Player implements GameObject {
     constructor(
         private x: number,
         private y: number,
@@ -8,11 +10,15 @@ export class Player {
     private rotationSpeed = 0.1;
     private angle = 0;
     private velocity = 0;
-    private maxVelocity = 5; 
+    private maxVelocity = 5;
     private velocityDecay = 0.05;
     private acceleration = 0.2;
 
-    update(keyPressed: Record<string, boolean>) {
+    getPosition(): Position {
+        return { x: this.x - this.image.width / 2, y: this.y - this.image.height / 2, width: this.image.width, height: this.image.height }
+    }
+
+    update(keyPressed: KeyboardState) {
         if (keyPressed['ArrowUp']) {
             this.velocity += this.acceleration;
         } else if (keyPressed['ArrowDown']) {
@@ -20,9 +26,9 @@ export class Player {
         } else {
             if (Math.abs(this.velocity) > this.velocityDecay) {
                 this.velocity -= Math.sign(this.velocity) * this.velocityDecay;
-              } else {
+            } else {
                 this.velocity = 0;
-              }
+            }
         }
 
         this.velocity = Math.min(Math.max(this.velocity, -this.maxVelocity), this.maxVelocity);
@@ -36,6 +42,11 @@ export class Player {
         if (keyPressed['ArrowRight']) {
             this.angle += this.rotationSpeed;
         }
+
+    }
+
+    handleCollision() {
+        this.velocity = -this.velocity;
     }
 
     draw(ctx: CanvasRenderingContext2D) {
@@ -43,7 +54,7 @@ export class Player {
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
 
-        ctx.drawImage(this.image, -this.image.width / 2, -this.image.height / 2, this.image.width, this.image.height)
+        ctx.drawImage(this.image, -this.image.width / 2, -this.image.height / 2);
 
         ctx.restore();
     }
