@@ -1,24 +1,10 @@
+import { KeyboardHandler } from "./keyboard-handler";
 import { GameObject } from "./types";
 
 export class Game {
-    keyPressed: Record<string, boolean> = {}
-
-    constructor(private ctx: CanvasRenderingContext2D, private canvas: HTMLCanvasElement) { }
-
     private gameObjects: GameObject[] = [];
 
-    private keyDownHandler(event: KeyboardEvent) {
-        this.keyPressed[event.key] = true;
-    }
-
-    private keyUpHandler(event: KeyboardEvent) {
-        this.keyPressed[event.key] = false;
-    }
-
-    bindKeyEvents(element: Document) {
-        element.addEventListener('keydown', (event) => { this.keyDownHandler(event) });
-        element.addEventListener('keyup', (event) => { this.keyUpHandler(event) });
-    }
+    constructor(private ctx: CanvasRenderingContext2D, private keyboardHandler: KeyboardHandler, private screenWidth: number, private screenHeight: number) { }
 
     addGameObject(object: GameObject) {
         this.gameObjects.push(object);
@@ -35,11 +21,11 @@ export class Game {
     }
 
     private clearCanvas() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.screenWidth, this.screenHeight);
     }
 
     private updateObjects() {
-        this.gameObjects.forEach((object) => { object.update(this.keyPressed) });
+        this.gameObjects.forEach((object) => { object.update(this.keyboardHandler.keyPressed) });
     }
 
     private drawObjects() {

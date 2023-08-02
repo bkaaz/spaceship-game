@@ -4,14 +4,17 @@ import { preloadImages } from './utils';
 import { Game } from './game';
 import { Player } from './game-objects/player';
 import { Obstacle } from './game-objects/obstacle';
+import { KeyboardHandler } from './keyboard-handler';
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
 
 const images = await preloadImages([spaceshipImg])
 
-const game = new Game(ctx, canvas);
-game.bindKeyEvents(document);
+const keyboardHandler = new KeyboardHandler();
+keyboardHandler.setup();
+
+const game = new Game(ctx, keyboardHandler, canvas.width, canvas.height);
 game.addGameObject(new Player(100, 100, images[spaceshipImg]))
 game.addGameObject(new Obstacle(300, 300, 50, 50));
 game.runGameLoop()
