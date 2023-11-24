@@ -18,9 +18,12 @@ export class Obstacle implements GameObject {
 
     handleCollision() { }
 
-    draw(ctx: CanvasRenderingContext2D) {
+    draw(ctx: CanvasRenderingContext2D, cameraX: number, cameraY: number) {
+        const x = this.x - cameraX;
+        const y = this.y - cameraY;
+
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillRect(x, y, this.width, this.height);
     }
 
     isCollidingWith(): boolean {

@@ -15,6 +15,8 @@ const keyboardHandler = new KeyboardHandler();
 keyboardHandler.setup();
 
 const game = new Game(ctx, keyboardHandler, canvas.width, canvas.height);
-game.addGameObject(new Player(100, 100, images[spaceshipImg]))
+const player = new Player(100, 100, images[spaceshipImg])
+game.addGameObject(player);
+game.setPlayer(player);
 game.addGameObject(new Obstacle(300, 300, 50, 50));
 game.runGameLoop()

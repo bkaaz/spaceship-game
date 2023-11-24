@@ -9,8 +9,8 @@ export interface Position {
 
 export interface GameObject {
     get position(): Position;
-    update(keyPressed?: KeyboardState): void;
-    draw(ctx: CanvasRenderingContext2D): void;
+    update(keyPressed: KeyboardState): void;
+    draw(ctx: CanvasRenderingContext2D, cameraX: number, cameraY: number): void;
     handleCollision(): void;
     isCollidingWith(position: Position): boolean;
     isCollidingWithScreenEdge(screenWidth: number, screenHeight: number): boolean;

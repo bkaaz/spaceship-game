@@ -50,9 +50,12 @@ export class Player implements GameObject {
         this.velocity = -this.velocity;
     }
 
-    draw(ctx: CanvasRenderingContext2D) {
+    draw(ctx: CanvasRenderingContext2D, cameraX: number, cameraY: number) {
+        const x = this.x - cameraX;
+        const y = this.y - cameraY;
+
         ctx.save();
-        ctx.translate(this.x, this.y);
+        ctx.translate(x, y);
         ctx.rotate(this.angle);
 
         ctx.drawImage(this.image, -this.image.width / 2, -this.image.height / 2);
