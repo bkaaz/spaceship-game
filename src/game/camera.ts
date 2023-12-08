@@ -1,4 +1,4 @@
-import { Position } from "./game-objects/types";
+import { Position } from "../types";
 
 export class Camera {
     x: number = 0;

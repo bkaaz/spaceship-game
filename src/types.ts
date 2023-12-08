@@ -1,1 +1,9 @@
-export type KeyboardState = Record<string, boolean>;
+export interface Position {
+    x: number;
+    y: number;
+}
+
+export interface Dimension {
+    width: number;
+    height: number;
+}
