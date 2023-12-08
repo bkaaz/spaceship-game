@@ -1,4 +1,4 @@
-import { detectCollision } from "../../utils/collision-detection";
+import { checkRectangleCollision  } from "../../utils/collision-detection";
 import { GameContext } from "../../game/game-context";
 import { GameEntity, GameEntityBehavior } from "../entity";
 
@@ -38,7 +38,7 @@ export class PlayerBehavior implements GameEntityBehavior {
     entity.x += this.velocity * Math.cos(this.angle);
     entity.y += this.velocity * Math.sin(this.angle);
 
-    if (detectCollision(entity, gameCtx)) {
+    if (checkRectangleCollision (entity, gameCtx)) {
       entity.x = previousX;
       entity.y = previousY;
       this.velocity = -this.velocity;
