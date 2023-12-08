@@ -14,7 +14,7 @@ export const checkRectangleCollision = (
     if (
       gameCtx.entities[i] != entity &&
       gameCtx.entities[i].isCDEnabled &&
-      isColliding(entity, gameCtx.entities[i])
+      isRectEntityColliding(entity, gameCtx.entities[i])
     ) {
       return true;
     }
@@ -22,7 +22,7 @@ export const checkRectangleCollision = (
   return false;
 };
 
-const isColliding = (entity1: GameEntity, entity2: GameEntity) => {
+export const isRectEntityColliding = (entity1: GameEntity, entity2: GameEntity) => {
   return (
     entity1.x < entity2.x + entity2.width &&
     entity1.x + entity1.width > entity2.x &&
