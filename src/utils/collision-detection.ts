@@ -6,7 +6,7 @@ export const checkRectangleCollision = (
   entity: GameEntity,
   gameCtx: GameContext
 ) => {
-  if (isCollidingWithAreaEdge(entity, gameCtx.areaDimension)) {
+  if (checkBoundaryCollision(entity, gameCtx.areaDimension)) {
     return true;
   }
 
@@ -31,7 +31,7 @@ const isColliding = (entity1: GameEntity, entity2: GameEntity) => {
   );
 };
 
-const isCollidingWithAreaEdge = (
+const checkBoundaryCollision = (
   entity: GameEntity,
   areaDimension: Dimension
 ): boolean => {
