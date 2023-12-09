@@ -1,4 +1,4 @@
-import { Position } from "../types";
+import { Position } from "@src/types";
 
 export class Camera {
   x: number = 0;

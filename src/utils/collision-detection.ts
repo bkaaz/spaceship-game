@@ -1,10 +1,10 @@
-import { GameEntity } from "../entities/entity";
-import { GameContext } from "../game/game-context";
-import { Dimension } from "../types";
+import { GameEntity } from "@src/entities/entity";
+import { GameContext } from "@src/game/game-context";
+import { Dimension } from "@src/types";
 
 export const checkRectangleCollision = (
   entity: GameEntity,
-  gameCtx: GameContext
+  gameCtx: GameContext,
 ) => {
   if (checkBoundaryCollision(entity, gameCtx.areaDimension)) {
     return true;
@@ -22,7 +22,10 @@ export const checkRectangleCollision = (
   return false;
 };
 
-export const isRectEntityColliding = (entity1: GameEntity, entity2: GameEntity) => {
+export const isRectEntityColliding = (
+  entity1: GameEntity,
+  entity2: GameEntity,
+) => {
   return (
     entity1.x < entity2.x + entity2.width &&
     entity1.x + entity1.width > entity2.x &&
@@ -33,7 +36,7 @@ export const isRectEntityColliding = (entity1: GameEntity, entity2: GameEntity) 
 
 const checkBoundaryCollision = (
   entity: GameEntity,
-  areaDimension: Dimension
+  areaDimension: Dimension,
 ): boolean => {
   const { x, y, width, height } = entity;
   return (

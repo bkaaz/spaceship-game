@@ -1,4 +1,4 @@
-import { GameContext } from "../game/game-context";
+import { GameContext } from "@src/game/game-context";
 
 export interface GameEntityBehavior {
   update(entity: GameEntity, gameCtx: GameContext): void;

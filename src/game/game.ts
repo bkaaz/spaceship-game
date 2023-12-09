@@ -1,7 +1,7 @@
-import { GameEntity } from "../entities/entity";
+import { GameEntity } from "@src/entities/entity";
+import { Dimension } from "@src/types";
+import { KeyboardHandler } from "@src/utils/keyboard-handler";
 import { GameContext } from "./game-context";
-import { KeyboardHandler } from "../utils/keyboard-handler";
-import { Dimension } from "../types";
 
 interface GameOptions {
   canvasCtx: CanvasRenderingContext2D;

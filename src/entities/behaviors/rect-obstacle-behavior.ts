@@ -1,5 +1,5 @@
-import { GameContext } from "../../game/game-context";
-import { GameEntity, GameEntityBehavior } from "../entity";
+import { GameContext } from "@src/game/game-context";
+import { GameEntityBehavior, GameEntity } from "@src/entities/entity";
 
 export class RectObstacleBehavior implements GameEntityBehavior {
   constructor(private color: string) {}

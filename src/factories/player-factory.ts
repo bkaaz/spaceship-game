@@ -1,5 +1,5 @@
-import { PlayerBehavior } from "../entities/behaviors/player-behavior";
-import { GameEntity } from "../entities/entity";
+import { PlayerBehavior } from "@src/entities/behaviors/player-behavior";
+import { GameEntity } from "@src/entities/entity";
 
 export function createPlayer(
   x: number,

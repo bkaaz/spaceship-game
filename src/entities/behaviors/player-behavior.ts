@@ -1,6 +1,6 @@
-import { checkRectangleCollision  } from "../../utils/collision-detection";
-import { GameContext } from "../../game/game-context";
-import { GameEntity, GameEntityBehavior } from "../entity";
+import { GameContext } from "@src/game/game-context";
+import { checkRectangleCollision } from "@src/utils/collision-detection";
+import { GameEntityBehavior, GameEntity } from "@src/entities/entity";
 
 export class PlayerBehavior implements GameEntityBehavior {
   private rotationSpeed = 0.1;
@@ -30,7 +30,7 @@ export class PlayerBehavior implements GameEntityBehavior {
 
     this.velocity = Math.min(
       Math.max(this.velocity, -this.maxVelocity),
-      this.maxVelocity
+      this.maxVelocity,
     );
 
     const previousX = entity.x;
@@ -38,7 +38,7 @@ export class PlayerBehavior implements GameEntityBehavior {
     entity.x += this.velocity * Math.cos(this.angle);
     entity.y += this.velocity * Math.sin(this.angle);
 
-    if (checkRectangleCollision (entity, gameCtx)) {
+    if (checkRectangleCollision(entity, gameCtx)) {
       entity.x = previousX;
       entity.y = previousY;
       this.velocity = -this.velocity;
@@ -55,7 +55,7 @@ export class PlayerBehavior implements GameEntityBehavior {
   draw(
     entity: GameEntity,
     canvasCtx: CanvasRenderingContext2D,
-    gameCtx: GameContext
+    gameCtx: GameContext,
   ): void {
     const x = entity.x - gameCtx.cameraPosition.x;
     const y = entity.y - gameCtx.cameraPosition.y;
@@ -67,7 +67,7 @@ export class PlayerBehavior implements GameEntityBehavior {
     canvasCtx.drawImage(
       this.image,
       -this.image.width / 2,
-      -this.image.height / 2
+      -this.image.height / 2,
     );
 
     canvasCtx.restore();

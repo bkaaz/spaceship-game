@@ -1,7 +1,7 @@
+import { GameEntity } from "@src/entities/entity";
+import { Position, Dimension } from "@src/types";
+import { KeyboardState, KeyboardHandler } from "@src/utils/keyboard-handler";
 import { Camera } from "./camera";
-import { GameEntity } from "../entities/entity";
-import { KeyboardHandler, KeyboardState } from "../utils/keyboard-handler";
-import { Dimension, Position } from "../types";
 
 export class GameContext {
   private gameEntities: GameEntity[] = [];
