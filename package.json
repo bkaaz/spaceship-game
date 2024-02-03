@@ -9,15 +9,13 @@
     "test": "jest",
     "prettier": "prettier . --write",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky && husky install"
   },
   "lint-staged": {
-    "*.js": "eslint"
+    "*.js": "eslint --cache --fix",
+    "*.ts": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
