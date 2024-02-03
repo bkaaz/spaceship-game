@@ -1,4 +1,4 @@
-import { GameEntity } from "@src/entities/entity";
+import { GameEntity } from "@src/entities/game-entity";
 import { Position, Dimension } from "@src/types";
 import { KeyboardState, KeyboardHandler } from "@src/utils/keyboard-handler";
 import { Camera } from "./camera";

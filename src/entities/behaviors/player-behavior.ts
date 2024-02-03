@@ -1,6 +1,6 @@
 import { GameContext } from "@src/game/game-context";
 import { checkRectangleCollision } from "@src/utils/collision-detection";
-import { GameEntityBehavior, GameEntity } from "@src/entities/entity";
+import { GameEntityBehavior, GameEntity } from "@src/entities/game-entity";
 
 export class PlayerBehavior implements GameEntityBehavior {
   private rotationSpeed = 0.1;

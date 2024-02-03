@@ -1,5 +1,5 @@
 import { RectObstacleBehavior } from "@src/entities/behaviors/rect-obstacle-behavior";
-import { GameEntity } from "@src/entities/entity";
+import { GameEntity } from "@src/entities/game-entity";
 
 export function createRectObstacle(
   x: number,

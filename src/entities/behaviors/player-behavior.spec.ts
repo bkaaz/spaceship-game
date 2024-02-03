@@ -3,7 +3,7 @@ import {
   createMockedGameEntity,
   createMockedImage,
 } from "@tests/factories";
-import { GameEntity } from "@src/entities/entity";
+import { GameEntity } from "@src/entities/game-entity";
 import { GameContext } from "@src/game/game-context";
 import { PlayerBehavior } from "./player-behavior";
 import { checkRectangleCollision } from "@src/utils/collision-detection";

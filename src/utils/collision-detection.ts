@@ -1,4 +1,4 @@
-import { GameEntity } from "@src/entities/entity";
+import { GameEntity } from "@src/entities/game-entity";
 import { GameContext } from "@src/game/game-context";
 import { Dimension } from "@src/types";
 

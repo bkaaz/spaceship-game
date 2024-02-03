@@ -1,13 +1,9 @@
-import { GameEntity } from "@src/entities/entity";
-import { Dimension } from "@src/types";
-import { KeyboardHandler } from "@src/utils/keyboard-handler";
+import { GameEntity } from "@src/entities/game-entity";
 import { GameContext } from "./game-context";
 
 interface GameOptions {
   canvasCtx: CanvasRenderingContext2D;
-  keyboardHandler: KeyboardHandler;
-  screen: Dimension;
-  area: Dimension;
+  gameCtx: GameContext;
 }
 
 export class Game {
@@ -15,9 +11,9 @@ export class Game {
   private gameCtx: GameContext;
   private mainEntity: GameEntity | null = null;
 
-  constructor({ canvasCtx, keyboardHandler, screen, area }: GameOptions) {
+  constructor({ canvasCtx, gameCtx }: GameOptions) {
     this.canvasCtx = canvasCtx;
-    this.gameCtx = new GameContext(screen, area, keyboardHandler);
+    this.gameCtx = gameCtx;
   }
 
   addGameEntity(entity: GameEntity) {
@@ -47,8 +43,8 @@ export class Game {
   }
 
   private updateEntities() {
-    this.gameCtx.entities.forEach((object) => {
-      object.update(this.gameCtx);
+    this.gameCtx.entities.forEach((entity) => {
+      entity.update(this.gameCtx);
     });
   }
 

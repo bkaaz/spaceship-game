@@ -1,4 +1,4 @@
-import { GameEntity } from "@src/entities/entity";
+import { GameEntity } from "@src/entities/game-entity";
 import { isRectEntityColliding } from "./collision-detection";
 
 const mockBehavior = { update() {}, draw() {} };

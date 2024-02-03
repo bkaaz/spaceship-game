@@ -1,4 +1,4 @@
-import { GameEntity } from "../../src/entities/entity";
+import { GameEntity } from "../../src/entities/game-entity";
 
 export function createMockedGameEntity(
   overrides: Partial<GameEntity>,
