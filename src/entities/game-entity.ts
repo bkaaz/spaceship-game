@@ -5,8 +5,9 @@ export interface GameEntityBehavior {
   draw(
     entity: GameEntity,
     canvasCtx: CanvasRenderingContext2D,
-    gameCtx: GameContext,
+    gameCtx: GameContext
   ): void;
+  onHit?(entity: GameEntity): void;
 }
 
 export interface GameEntityOptions {
@@ -23,6 +24,7 @@ export class GameEntity {
   width: number;
   height: number;
   isCDEnabled: boolean;
+  isDestroyed = false;
   private behavior: GameEntityBehavior;
 
   constructor(behavior: GameEntityBehavior, options: GameEntityOptions) {
@@ -40,5 +42,13 @@ export class GameEntity {
 
   draw(canvasCtx: CanvasRenderingContext2D, gameCtx: GameContext) {
     this.behavior.draw(this, canvasCtx, gameCtx);
+  }
+
+  triggerHit(entity: GameEntity) {
+    this.behavior.onHit?.(entity);
+  }
+
+  destroy() {
+    this.isDestroyed = true;
   }
 }

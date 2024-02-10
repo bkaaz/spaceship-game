@@ -30,6 +30,7 @@ describe("Game", () => {
     entities: [mockEntity],
     screenDimension: { width: 10, height: 10 },
     updateCameraPosition: jest.fn(),
+    removeDestroyedEntities: jest.fn(),
   } as unknown as GameContext;
 
   beforeEach(() => {

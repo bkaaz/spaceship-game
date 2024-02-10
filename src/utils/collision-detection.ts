@@ -2,7 +2,7 @@ import { GameEntity } from "@src/entities/game-entity";
 import { GameContext } from "@src/game/game-context";
 import { Dimension } from "@src/types";
 
-export const checkRectangleCollision = (
+export const checkCollisions = (
   entity: GameEntity,
   gameCtx: GameContext,
 ) => {
@@ -14,7 +14,7 @@ export const checkRectangleCollision = (
     if (
       gameCtx.entities[i] != entity &&
       gameCtx.entities[i].isCDEnabled &&
-      isRectEntityColliding(entity, gameCtx.entities[i])
+      isEntityColliding(entity, gameCtx.entities[i])
     ) {
       return true;
     }
@@ -22,7 +22,7 @@ export const checkRectangleCollision = (
   return false;
 };
 
-export const isRectEntityColliding = (
+export const isEntityColliding = (
   entity1: GameEntity,
   entity2: GameEntity,
 ) => {
@@ -34,7 +34,7 @@ export const isRectEntityColliding = (
   );
 };
 
-const checkBoundaryCollision = (
+export const checkBoundaryCollision = (
   entity: GameEntity,
   areaDimension: Dimension,
 ): boolean => {

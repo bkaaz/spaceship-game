@@ -6,10 +6,10 @@ import {
 import { GameEntity } from "@src/entities/game-entity";
 import { GameContext } from "@src/game/game-context";
 import { PlayerBehavior } from "./player-behavior";
-import { checkRectangleCollision } from "@src/utils/collision-detection";
+import { checkCollisions } from "@src/utils/collision-detection";
 
 jest.mock("@src/utils/collision-detection", () => ({
-  checkRectangleCollision: jest.fn(),
+  checkCollisions: jest.fn(),
 }));
 
 describe("PlayerBehavior", () => {
@@ -27,7 +27,7 @@ describe("PlayerBehavior", () => {
     });
     mockGameContext = createMockedGameContext({});
     playerBehavior = new PlayerBehavior(createMockedImage({}));
-    (checkRectangleCollision as jest.Mock).mockImplementation(() => false);
+    (checkCollisions as jest.Mock).mockImplementation(() => false);
   });
 
   test("Player moves forward when ArrowUp is pressed", () => {
@@ -66,7 +66,7 @@ describe("PlayerBehavior", () => {
 
   test("Player position should not change when there is collision and ArrowUp is pressed", () => {
     mockGameContext.keyPressed.ArrowUp = true;
-    (checkRectangleCollision as jest.Mock).mockImplementation(() => true);
+    (checkCollisions as jest.Mock).mockImplementation(() => true);
     playerBehavior.update(mockEntity, mockGameContext);
 
     expect(mockEntity.x).toBe(startingPositionX);

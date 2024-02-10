@@ -9,7 +9,7 @@ export class Camera {
   constructor(
     screenWidth: number,
     screenHeight: number,
-    private offset = 100,
+    private offset = 250,
   ) {
     this.width = screenWidth;
     this.height = screenHeight;

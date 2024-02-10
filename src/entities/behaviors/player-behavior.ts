@@ -1,6 +1,7 @@
 import { GameContext } from "@src/game/game-context";
-import { checkRectangleCollision } from "@src/utils/collision-detection";
+import { checkCollisions } from "@src/utils/collision-detection";
 import { GameEntityBehavior, GameEntity } from "@src/entities/game-entity";
+import { createProjectile } from "@src/factories/projectile-factory";
 
 export class PlayerBehavior implements GameEntityBehavior {
   private rotationSpeed = 0.1;
@@ -10,12 +11,34 @@ export class PlayerBehavior implements GameEntityBehavior {
   private velocityDecay = 0.05;
   private acceleration = 0.2;
   private image: HTMLImageElement;
+  private shootDelay = 200;
+  private lastShotTime = 0;
 
   constructor(image: HTMLImageElement) {
     this.image = image;
   }
 
   update(entity: GameEntity, gameCtx: GameContext): void {
+    this.handleControls(entity, gameCtx);
+
+    this.velocity = Math.min(
+      Math.max(this.velocity, -this.maxVelocity),
+      this.maxVelocity
+    );
+
+    const previousX = entity.x;
+    const previousY = entity.y;
+    entity.x += this.velocity * Math.cos(this.angle);
+    entity.y += this.velocity * Math.sin(this.angle);
+
+    if (checkCollisions(entity, gameCtx)) {
+      entity.x = previousX;
+      entity.y = previousY;
+      this.velocity = -this.velocity;
+    }
+  }
+
+  private handleControls(entity: GameEntity, gameCtx: GameContext) {
     if (gameCtx.keyPressed["ArrowUp"]) {
       this.velocity += this.acceleration;
     } else if (gameCtx.keyPressed["ArrowDown"]) {
@@ -28,34 +51,47 @@ export class PlayerBehavior implements GameEntityBehavior {
       }
     }
 
-    this.velocity = Math.min(
-      Math.max(this.velocity, -this.maxVelocity),
-      this.maxVelocity,
-    );
-
-    const previousX = entity.x;
-    const previousY = entity.y;
-    entity.x += this.velocity * Math.cos(this.angle);
-    entity.y += this.velocity * Math.sin(this.angle);
-
-    if (checkRectangleCollision(entity, gameCtx)) {
-      entity.x = previousX;
-      entity.y = previousY;
-      this.velocity = -this.velocity;
-    }
-
     if (gameCtx.keyPressed["ArrowLeft"]) {
       this.angle -= this.rotationSpeed;
     }
     if (gameCtx.keyPressed["ArrowRight"]) {
       this.angle += this.rotationSpeed;
     }
+
+    if (
+      (gameCtx.keyPressed["z"] || gameCtx.keyPressed["Z"]) &&
+      this.canShoot()
+    ) {
+      this.shoot(entity, gameCtx);
+    }
+  }
+
+  canShoot() {
+    return Date.now() - this.lastShotTime >= this.shootDelay;
+  }
+
+  shoot(entity: GameEntity, gameCtx: GameContext) {
+    const offset = 10;
+    const velocity = 10;
+    const projectile = createProjectile(
+      entity,
+      entity.x +
+        entity.width / 2 +
+        (entity.width / 2 + offset) * Math.cos(this.angle),
+      entity.y +
+        entity.height / 2 +
+        (entity.height / 2 + offset) * Math.sin(this.angle),
+      velocity * Math.cos(this.angle),
+      velocity * Math.sin(this.angle)
+    );
+    gameCtx.addGameEntity(projectile);
+    this.lastShotTime = Date.now();
   }
 
   draw(
     entity: GameEntity,
     canvasCtx: CanvasRenderingContext2D,
-    gameCtx: GameContext,
+    gameCtx: GameContext
   ): void {
     const x = entity.x - gameCtx.cameraPosition.x;
     const y = entity.y - gameCtx.cameraPosition.y;
@@ -67,7 +103,7 @@ export class PlayerBehavior implements GameEntityBehavior {
     canvasCtx.drawImage(
       this.image,
       -this.image.width / 2,
-      -this.image.height / 2,
+      -this.image.height / 2
     );
 
     canvasCtx.restore();

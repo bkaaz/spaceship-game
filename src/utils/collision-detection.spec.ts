@@ -1,5 +1,5 @@
 import { GameEntity } from "@src/entities/game-entity";
-import { isRectEntityColliding } from "./collision-detection";
+import { isEntityColliding } from "./collision-detection";
 
 const mockBehavior = { update() {}, draw() {} };
 
@@ -20,7 +20,7 @@ describe("collision-detection", () => {
       isCDEnabled: true,
     });
 
-    expect(isRectEntityColliding(entityA, entityB)).toBe(true);
+    expect(isEntityColliding(entityA, entityB)).toBe(true);
   });
 
   test("isRectEntityColliding should return false for non-intersecting entities", () => {
@@ -39,6 +39,6 @@ describe("collision-detection", () => {
       isCDEnabled: true,
     });
 
-    expect(isRectEntityColliding(entityA, entityB)).toBe(false);
+    expect(isEntityColliding(entityA, entityB)).toBe(false);
   });
 });

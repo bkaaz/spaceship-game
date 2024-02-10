@@ -9,7 +9,7 @@ export class RectObstacleBehavior implements GameEntityBehavior {
   draw(
     entity: GameEntity,
     canvasCtx: CanvasRenderingContext2D,
-    gameCtx: GameContext,
+    gameCtx: GameContext
   ): void {
     canvasCtx.save();
 
@@ -20,5 +20,9 @@ export class RectObstacleBehavior implements GameEntityBehavior {
     canvasCtx.fillRect(x, y, entity.width, entity.height);
 
     canvasCtx.restore();
+  }
+
+  onHit() {
+    this.color = "red";
   }
 }

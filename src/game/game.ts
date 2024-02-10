@@ -31,6 +31,7 @@ export class Game {
     this.clearCanvas();
 
     this.updateEntities();
+    this.removeDestroyedEntities();
     this.updateCameraPosition();
     this.drawEntities();
 
@@ -46,6 +47,10 @@ export class Game {
     this.gameCtx.entities.forEach((entity) => {
       entity.update(this.gameCtx);
     });
+  }
+
+  private removeDestroyedEntities() {
+    this.gameCtx.removeDestroyedEntities();
   }
 
   private updateCameraPosition() {

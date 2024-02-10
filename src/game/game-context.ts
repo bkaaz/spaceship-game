@@ -31,7 +31,7 @@ export class GameContext {
   constructor(
     private screen: Dimension,
     private area: Dimension,
-    keyboardHandler: KeyboardHandler,
+    keyboardHandler: KeyboardHandler
   ) {
     this.camera = new Camera(screen.width, screen.height);
     keyboardHandler.on("key-state-changed", (keyState: KeyboardState) => {
@@ -41,6 +41,10 @@ export class GameContext {
 
   addGameEntity(entity: GameEntity) {
     this.gameEntities.push(entity);
+  }
+
+  removeDestroyedEntities(): void {
+    this.gameEntities = this.gameEntities.filter(entity => !entity.isDestroyed);
   }
 
   updateCameraPosition(entity: GameEntity) {
