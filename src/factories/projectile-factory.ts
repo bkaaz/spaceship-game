@@ -5,8 +5,8 @@ export function createProjectile(
   originEntity: GameEntity,
   x: number,
   y: number,
-  velocityX: number,
-  velocityY: number
+  angle: number,
+  velocity: number,
 ): GameEntity {
   const options = {
     x: x,
@@ -17,7 +17,7 @@ export function createProjectile(
   };
 
   return new GameEntity(
-    new ProjectileBehavior(originEntity, velocityX, velocityY),
+    new ProjectileBehavior(originEntity, angle, velocity),
     options
   );
 }

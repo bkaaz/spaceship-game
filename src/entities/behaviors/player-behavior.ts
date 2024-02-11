@@ -71,18 +71,19 @@ export class PlayerBehavior implements GameEntityBehavior {
   }
 
   shoot(entity: GameEntity, gameCtx: GameContext) {
-    const offset = 10;
-    const velocity = 10;
+    const offset = 30;
+    const projectileVelocity = 20;
+    const projectileX =
+      entity.x + entity.width / 2 + offset * Math.cos(this.angle);
+    const projectileY =
+      entity.y + entity.height / 2 + offset * Math.sin(this.angle);
+
     const projectile = createProjectile(
       entity,
-      entity.x +
-        entity.width / 2 +
-        (entity.width / 2 + offset) * Math.cos(this.angle),
-      entity.y +
-        entity.height / 2 +
-        (entity.height / 2 + offset) * Math.sin(this.angle),
-      velocity * Math.cos(this.angle),
-      velocity * Math.sin(this.angle)
+      projectileX,
+      projectileY,
+      this.angle,
+      projectileVelocity
     );
     gameCtx.addGameEntity(projectile);
     this.lastShotTime = Date.now();
