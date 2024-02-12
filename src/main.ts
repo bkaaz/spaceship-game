@@ -25,7 +25,7 @@ const game = new Game({
   gameCtx,
 });
 const player = createPlayer(100, 100, images[spaceshipImg]);
-game.addGameEntity(createOverlay(0, 0, 1000, 1000, "#333"));
+game.addGameEntity(createOverlay(0, 0, 1000, 1000));
 game.addGameEntity(createRectObstacle(300, 300, 50, 50));
 game.addGameEntity(player);
 game.setMainEntity(player);

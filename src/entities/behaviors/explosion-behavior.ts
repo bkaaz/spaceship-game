@@ -1,3 +1,4 @@
+import { colors } from "@src/consts";
 import { GameEntityBehavior, GameEntity } from "@src/entities/game-entity";
 import { GameContext } from "@src/game/game-context";
 
@@ -27,7 +28,7 @@ export class ExplosionBehavior implements GameEntityBehavior {
     const x = entity.x - gameCtx.cameraPosition.x;
     const y = entity.y - gameCtx.cameraPosition.y;
 
-    canvasCtx.strokeStyle = "white";
+    canvasCtx.strokeStyle = colors.playerPrimaryColor;
     canvasCtx.beginPath();
     canvasCtx.arc(x, y, radius, 0, Math.PI * 2);
     canvasCtx.stroke();

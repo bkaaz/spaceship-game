@@ -1,5 +1,6 @@
 import { GameContext } from "@src/game/game-context";
 import { GameEntityBehavior, GameEntity } from "@src/entities/game-entity";
+import { colors } from "@src/consts";
 
 export class SplinterBehavior implements GameEntityBehavior {
   private animationDuration = 200;
@@ -33,7 +34,7 @@ export class SplinterBehavior implements GameEntityBehavior {
 
     canvasCtx.beginPath();
     canvasCtx.arc(x, y, entity.width / 2, 0, Math.PI * 2);
-    canvasCtx.fillStyle = "white";
+    canvasCtx.fillStyle = colors.playerPrimaryColor;
     canvasCtx.fill();
 
     canvasCtx.restore();

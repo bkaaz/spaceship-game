@@ -2,6 +2,7 @@ import { GameContext } from "@src/game/game-context";
 import { checkCollisions } from "@src/utils/collision-detection";
 import { GameEntityBehavior, GameEntity } from "@src/entities/game-entity";
 import { createProjectile } from "@src/factories/projectile-factory";
+import { colors } from "@src/consts";
 
 export class PlayerBehavior implements GameEntityBehavior {
   private rotationSpeed = 0.1;
@@ -94,8 +95,12 @@ export class PlayerBehavior implements GameEntityBehavior {
     canvasCtx: CanvasRenderingContext2D,
     gameCtx: GameContext
   ): void {
+    const r = this.image.width / 2;
     const x = entity.x - gameCtx.cameraPosition.x;
     const y = entity.y - gameCtx.cameraPosition.y;
+
+    const backgroundPadding = 10;
+    this.drawBackground(x + r, y + r, r + backgroundPadding, canvasCtx);
 
     canvasCtx.save();
     canvasCtx.translate(x + this.image.width / 2, y + this.image.height / 2);
@@ -106,6 +111,26 @@ export class PlayerBehavior implements GameEntityBehavior {
       -this.image.width / 2,
       -this.image.height / 2
     );
+    canvasCtx.restore();
+  }
+
+  drawBackground(
+    x: number,
+    y: number,
+    r: number,
+    canvasCtx: CanvasRenderingContext2D
+  ) {
+    canvasCtx.save();
+
+    const rad = canvasCtx.createRadialGradient(x, y, 1, x, y, r);
+    rad.addColorStop(0, colors.playerPrimaryColor);
+    rad.addColorStop(1, colors.playerPrimaryColorTransparent);
+
+    canvasCtx.beginPath();
+    canvasCtx.arc(x, y, r, 0, 2 * Math.PI);
+
+    canvasCtx.fillStyle = rad;
+    canvasCtx.fill();
 
     canvasCtx.restore();
   }

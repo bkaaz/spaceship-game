@@ -1,4 +1,5 @@
-import { RectObstacleBehavior } from "@src/entities/behaviors/rect-obstacle-behavior";
+import { colors } from "@src/consts";
+import { AreaBehavior } from "@src/entities/behaviors/area-behavior";
 import { GameEntity } from "@src/entities/game-entity";
 
 export function createOverlay(
@@ -6,7 +7,7 @@ export function createOverlay(
   y: number,
   width: number,
   height: number,
-  color = "grey",
+  color = colors.overlayBorder,
 ): GameEntity {
   const options = {
     x: x,
@@ -16,5 +17,5 @@ export function createOverlay(
     isCDEnabled: false,
   };
 
-  return new GameEntity(new RectObstacleBehavior(color), options);
+  return new GameEntity(new AreaBehavior(color), options);
 }

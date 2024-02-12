@@ -6,6 +6,7 @@ import {
 } from "@src/utils/collision-detection";
 import { createExplosion } from "@src/factories/explosion-factory";
 import { createSplinter } from "@src/factories/splinter-factory";
+import { colors } from "@src/consts";
 
 export class ProjectileBehavior implements GameEntityBehavior {
   constructor(
@@ -74,7 +75,7 @@ export class ProjectileBehavior implements GameEntityBehavior {
 
     canvasCtx.beginPath();
     canvasCtx.arc(x, y, entity.width / 2, 0, Math.PI * 2);
-    canvasCtx.fillStyle = "white";
+    canvasCtx.fillStyle = colors.playerPrimaryColor;
     canvasCtx.fill();
 
     canvasCtx.restore();
